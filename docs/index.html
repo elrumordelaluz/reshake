@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<title>reshake</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<style>
+  html, 
+  body {
+    height: 100%;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+</style>
+
+<div id='root'></div>
+
+<div style='position:absolute;top:0;right:0;margin:16px;'>
+  <a href='https://twitter.com/share'
+    class='twitter-share-button'
+    data-text='reshake: CSShake in React'
+    data-via='elrumordelaluz'>
+    Tweet
+  </a>
+</div>
+
+<script src='bundle.js'></script>
+<script>
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document, "script", "twitter-wjs");
+</script>
