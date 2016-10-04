@@ -330,7 +330,7 @@ class App extends Component {
             const { name } = s
             const Elem = s
             return (
-              <li key={name} className={css(styles.section)}>
+              <li key={i} className={css(styles.section)}>
                 <aside className={css(styles.side)}>
                   <pre className={css(styles.code)}>
                     <code>
