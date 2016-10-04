@@ -22,6 +22,16 @@ const shakes = [
   ShakeCrazy,
 ]
 
+const names = [
+  'ShakeLittle',
+  'ShakeSlow',
+  'ShakeHard',
+  'ShakeHorizontal',
+  'ShakeVertical',
+  'ShakeRotate',
+  'ShakeCrazy',
+]
+
 const emojee = [
   '😬',
   '🙄',
@@ -327,7 +337,7 @@ class App extends Component {
         <p>Separated Components for each animation type</p>
         <ul>
           { shakes.map((s,i) => {
-            const { name } = s
+            const name = names[i]
             const Elem = s
             return (
               <li key={i} className={css(styles.section)}>
