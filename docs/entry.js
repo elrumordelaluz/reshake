@@ -113,10 +113,6 @@ const styles = StyleSheet.create({
     fontSize: '3em',
   },
   
-  emoji: {
-    fontSize: '3em',
-  },
-  
   footer: {
     width: '100%',
     textAlign: 'center',
@@ -351,7 +347,7 @@ class App extends Component {
                 <main className={css(styles.main)}>
                   <Elem 
                     orig={name === 'ShakeRotate' ? 'top center' : 'center center'}
-                    className={css(styles.emoji)}>
+                    style={{ fontSize: '3em' }}>
                     { emojee[i] }
                   </Elem>
                 </main>
