@@ -108,7 +108,7 @@ const Shake = ({
       style={props.style}
       className={classNames(props.className, css(styles.base), {
         [className]: active
-      })}>
+      })} { ...props }>
   		{ props.children }
   	</Elem>
 	);
