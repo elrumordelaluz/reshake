@@ -44,10 +44,13 @@ const emojee = [
 
 const styles = StyleSheet.create({
   wrapper: {
-    padding: '2em 10em 4em',
+    padding: '2em',
     backgroundColor: '#2ab8ac',
     color: 'white',
     minHeight: '100vh',
+    '@media (min-width: 52em)': {
+        padding: '2em 10em 4em',
+    },
   },
   title: {
     fontFamily: 'Dancing Script, cursive',
@@ -80,13 +83,23 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   side: {
-    flex: '0 0 12em',
+    flexGrow: 1,
+    flexShrink: 0,
+    flexBasis: '12em',
+    '@media (min-width: 40em)': {
+      flexGrow: 0,
+    },
   },
   main: {
-    flex: 1,
+    flexGrow: 1,
+    flexBasis: '50vw',
+    minHeight: '200px',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    '@media (min-width: 40em)': {
+      flex: 1,
+    }
   },
   
   range: {
@@ -331,7 +344,7 @@ class App extends Component {
         
         <h1 className={css(styles.title)}>More...</h1>
         <p>Separated Components for each animation type</p>
-        <ul>
+        <ul style={{ margin: 0, padding: 0, }}>
           { shakes.map((s,i) => {
             const name = names[i]
             const Elem = s
