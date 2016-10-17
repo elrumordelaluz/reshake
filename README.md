@@ -1,6 +1,8 @@
 # reshake
 
-[CSShake](http://elrumordelaluz.github.io/csshake/) as a React Functional Component. [Playground](https://elrumordelaluz.github.io/reshake/)
+[CSShake](http://elrumordelaluz.github.io/csshake/) as a React Functional Component. 
+
+##### [Playground](https://elrumordelaluz.github.io/reshake/) :: [Blog Post (ES)](http://octuweb.com/jugando-css-javascript/)
 
 ```
 npm i --save reshake
