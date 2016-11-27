@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import { StyleSheet, css } from 'aphrodite/no-important'
+import styled from 'styled-components'
+
 import {
   Shake,
   ShakeLittle,
@@ -42,108 +43,104 @@ const emojee = [
   '😹',
 ]
 
-const styles = StyleSheet.create({
-  wrapper: {
-    padding: '2em',
-    backgroundColor: '#2ab8ac',
-    color: 'white',
-    minHeight: '100vh',
-    '@media (min-width: 52em)': {
-        padding: '2em 10em 4em',
-    },
-  },
-  title: {
-    fontFamily: 'Dancing Script, cursive',
-    fontSize: '4em',
-    marginBottom: 0,
-    marginTop: 0,
-  },
-  link: {
-    textDecoration: 'none',
-    color: '#136760',
-  },
-  code: {
-    display: 'block',
-    padding: '1em 2em',
-    margin: '2em 0',
-    fontSize: '1em',
-    lineHeight: '1.42857143',
-    color: '#333',
-    wordBreak: 'break-all',
-    wordWrap: 'break-word',
-    backgroundColor: 'rgba(240,240,240,.25)',
-    border:' 1px solid rgba(240,240,240,.25)',
-    borderRadius: '4px',
-    overflow: 'auto',
-  },
-  
-  section: {
-    display: 'flex',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-  },
-  side: {
-    flexGrow: 1,
-    flexShrink: 0,
-    flexBasis: '12em',
-    '@media (min-width: 40em)': {
-      flexGrow: 0,
-    },
-  },
-  main: {
-    flexGrow: 1,
-    flexBasis: '50vw',
-    minHeight: '200px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    '@media (min-width: 40em)': {
-      flex: 1,
-    }
-  },
-  
-  range: {
-    marginBottom: '1em',
-  },
-  slider: {
-    boxSizing: 'border-box',
-    display: 'block',
-    width: '100%',
-    margin: '8px 0px 0px',
-    cursor: 'pointer',
-    color: 'inherit',
-    backgroundColor: 'rgba(0, 0, 0, 0.121569)',
-    backgroundClip: 'content-box',
-    height: '6px',
-    borderRadius: '999px',
-    WebkitAppearance: 'none',
-  },
-  label: {
-    fontSize: '.85em',
-  },
-  
-  checkbox: {
-    fontSize: '3em',
-  },
-  
-  footer: {
-    width: '100%',
-    textAlign: 'center',
-    fontSize: '.85em',
-    marginTop: '3em',
-  },
-})
+const Wrapper = styled.div`
+  padding: 2em;
+  background-color: #2ab8ac;
+  color: white;
+  min-height: 100vh;
+  @media screen and (min-width: 52em) {
+    padding: 2em 10em 4em;
+  }
+`
 
+const Title = styled.h1`
+  fontFamily: Dancing Script, 'cursive';
+  fontSize: 4em;
+  margin-bottom: 0;
+  margin-top: 0;
+`
+
+const Link = styled.a`
+  text-decoration: none;
+  color: #136760;
+`
+
+const Code = styled.pre`
+  display: block;
+  padding: 1em 2em;
+  margin: 2em 0;
+  font-size: 1em;
+  line-height: 1.42857143;
+  color: #333;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: rgba(240,240,240,.25);
+  border: 1px solid rgba(240,240,240,.25);
+  border-radius: 4px;
+  overflow: auto;
+`
+
+const Section = styled.section`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+`
+
+const ListItem = styled.li`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+`
+
+const Side = styled.aside`
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 12em;
+  @media screen and (min-width: 40em) {
+    flex-grow: 0;
+  }
+`
+
+const Main = styled.main`
+  flex-grow: 1;
+  flex-basis: 50vw;
+  min-height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media screen and (min-width: 40em) {
+    flex: 1;
+  }
+`
+
+const Slider = styled.input`
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  margin: 8px 0px 0px;
+  cursor: pointer;
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.121569);
+  background-clip: content-box;
+  height: 6px;
+  borderRadius: 999px;
+  appearance: none;
+`
+
+const Footer = styled.footer`
+  width: 100%;
+  text-align: center;
+  font-size: .85em;
+  margin-top: 3em;
+`
 
 const Range = ({ value, label, onChange, min = 0, max = 100, step = 1}) => {
   return (
-    <div className={css(styles.range)}>
-      <label
-        className={css(styles.label)}>
+    <div style={{ marginBottom: '1em' }}>
+      <label style={{ fontSize: '.85em' }}>
         { label }
       </label>
-      <input 
-        className={css(styles.slider)}
+      <Slider
         type="range"
         value={value}
         onChange={onChange}
@@ -156,11 +153,9 @@ const Range = ({ value, label, onChange, min = 0, max = 100, step = 1}) => {
 
 const Check = ({ checked = false, label, onChange }) => {
   return (
-    <div className={css(styles.range)}>
-      <label
-        className={css(styles.label)}>
-        <input 
-          className={css(styles.checkbox)}
+    <div style={{ marginBottom: '1em' }}>
+      <label style={{ fontSize: '.85em' }}>
+        <input style={{ fontSize: '3em' }}
           type="checkbox"
           onChange={onChange}
           checked={checked} />
@@ -225,8 +220,8 @@ class Customizer extends Component {
     
     return (
       <section>
-        <section className={css(styles.section)}>
-          <main className={css(styles.main)}>
+        <Section>
+          <Main>
             <Shake 
               fixed={fixed}
               fixedStop={fixedStop}
@@ -237,11 +232,11 @@ class Customizer extends Component {
               dur={dur}
               int={int}
               max={max}>
-              <h1 className={css(styles.title)}>&lt;Shake /&gt;</h1>
+              <Title>&lt;Shake /&gt;</Title>
             </Shake>
-          </main>
+          </Main>
           
-          <aside className={css(styles.side)}>
+          <Side>
             <Range label={`Horizontal ${h}`} value={h} onChange={changeH} />
             <Range label={`Vertical ${v}`} value={v} onChange={changeV} />
             <Range 
@@ -284,10 +279,10 @@ class Customizer extends Component {
                 onChange={toggleFixedStop}
                 checked={fixedStop} />
             )}
-          </aside>
+          </Side>
           
-        </section>
-        <pre className={css(styles.code)}>
+        </Section>
+        <Code>
           <code>
 {`import React, { Component } from 'react'
 import Shake from 'reshake'
@@ -311,7 +306,7 @@ class App extends Component {
   }
 }`}
           </code>
-        </pre>
+        </Code>
       </section>
     )
   }
@@ -321,57 +316,55 @@ class App extends Component {
 class App extends Component {
   render() {
     return (
-      <div className={css(styles.wrapper)}>
+      <Wrapper>
         
-        <h1 className={css(styles.title)}>&lt;Reshake/&gt;</h1>
+        <Title>&lt;Reshake/&gt;</Title>
         <p>
           <Shake elem='span'>
-            <a 
-              className={css(styles.link)} 
-              href="http://elrumordelaluz.github.io/csshake/">CSShake</a>
-          </Shake> as a React functional Component <a 
-            className={css(styles.link)} 
-            href="https://github.com/elrumordelaluz/reshake">[GitHub]</a>
+            <Link 
+              href="http://elrumordelaluz.github.io/csshake/">CSShake</Link>
+          </Shake> as a React functional Component <Link href="https://github.com/elrumordelaluz/reshake">[GitHub]</Link>
         </p>
         
-        <pre className={css(styles.code)}>
+        <Code>
           <code>
             npm i --save reshake
           </code>
-        </pre>
+        </Code>
         
         <Customizer />
         
-        <h1 className={css(styles.title)}>More...</h1>
+        <Title>More...</Title>
         <p>Separated Components for each animation type</p>
         <ul style={{ margin: 0, padding: 0, }}>
           { shakes.map((s,i) => {
             const name = names[i]
             const Elem = s
             return (
-              <li key={i} className={css(styles.section)}>
-                <aside className={css(styles.side)}>
-                  <pre className={css(styles.code)}>
+              <ListItem key={i}>
+                <Side>
+                  <Code>
                     <code>
                       {`<${name} />`}
                     </code>
-                  </pre>
-                </aside>
-                <main className={css(styles.main)}>
+                  </Code>
+                </Side>
+                <Main>
                   <Elem 
                     orig={name === 'ShakeRotate' ? 'top center' : 'center center'}
                     style={{ fontSize: '3em' }}>
                     { emojee[i] }
                   </Elem>
-                </main>
-              </li>
+                </Main>
+              </ListItem>
             )})
           }
         </ul>
-        <footer className={css(styles.footer)}>
-          Made with <ShakeSlow fixed>♡</ShakeSlow> by <a className={css(styles.link)} 
-            href="https://twitter.com/elrumordelaluz">@elrumordelaluz</a> using React.</footer>
-      </div>
+        <Footer >
+          Made with <ShakeSlow fixed>♡</ShakeSlow> by <Link 
+            href="https://twitter.com/elrumordelaluz">@elrumordelaluz</Link> using React.
+        </Footer>
+      </Wrapper>
     )
   }
 }

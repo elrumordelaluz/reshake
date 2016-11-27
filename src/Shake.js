@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, css } from 'aphrodite/no-important';
+import styled, { keyframes } from 'styled-components';
 import classNames from 'classnames';
 
 const Shake = ({
@@ -57,60 +57,42 @@ const Shake = ({
 	};
 
 	// Creamos los `@keyframes`
-	const keyframes = doKeyframes();
+	const kf = doKeyframes();
 	
-  const animAttrs = {
-  	animationName: keyframes,
-  	animationDuration: `${dur}ms`,
-  	animationIterationCount: q,
-  };
-  
-  const styles = StyleSheet.create({
-  	base: {
-  		display: 'inline-block',
-  		transformOrigin: orig,
-  	},
-  	shake: {
-  		...animAttrs,
-  	},
-  	triggered: {
-  		[trigger]: {
-  			...animAttrs,
-  		},
-  	},
-  	freez: {
-  		animationPlayState: !fixed ? 'paused' : 'running',
-  		[trigger]: {
-  			animationPlayState: !fixed ? 'running' : 'paused',
-  		},
-  	},
-  	init: {
-  		[trigger]: {
-  			animation: 'initial',
-  		},
-  	},
-  });
+	const toString = (obj) => {
+		return Object.keys(obj).reduce((acc, next) => {
+			return `${acc}
+			${next} {
+				transform: ${obj[next].transform}
+			}`
+		}, '')
+	};
+	
+	const shakeKeyframes = keyframes`${toString(doKeyframes())}`;
   
   const shouldShakeDefault = fixed || (!fixed && freez);
   const shouldShakeWhenTriggered = !fixed && !freez;
-  
-  const className = css(
-  	shouldShakeWhenTriggered && styles.triggered,
-  	shouldShakeDefault && styles.shake,
-  	freez && styles.freez,
-  	fixed && fixedStop && styles.init,
-  );
-  
-  const Elem = elem;
 	
+	const ShakeComp = styled[elem]`
+		animationName: ${shouldShakeDefault && shakeKeyframes};
+		animationDuration: ${dur}ms;
+  	animationIterationCount: ${q};
+		display: 'inline-block';
+		transformOrigin: ${orig};
+		
+		&${trigger} {
+			animationName: ${shouldShakeWhenTriggered && shakeKeyframes};
+			animationPlayState: ${freez && (!fixed ? 'running' : 'paused')};
+			animation: ${fixed && fixedStop && 'initial'};
+		}
+		
+		animationPlayState: ${freez && (!fixed ? 'paused' : 'running')};
+	`;
+		
 	return (
-		<Elem 
-      style={props.style}
-      className={classNames(props.className, css(styles.base), {
-        [className]: active
-      })} { ...props }>
+		<ShakeComp { ...props }>
   		{ props.children }
-  	</Elem>
+  	</ShakeComp>
 	);
 };
 

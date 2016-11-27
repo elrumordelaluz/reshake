@@ -29,6 +29,6 @@
     "webpack-dev-server": "^1.16.1"
   },
   "dependencies": {
-    "aphrodite": "^0.5.0"
+    "styled-components": "^1.1.2"
   }
 }
