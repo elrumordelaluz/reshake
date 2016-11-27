@@ -1,4 +1,8 @@
-var path = require('path')
+const path = require('path')
+const webpack = require('webpack')
+
+const isDev = process.env.NODE_ENV !== 'production'
+console.log(isDev);
 
 module.exports = {
   entry: './docs/entry.js',
@@ -15,12 +19,23 @@ module.exports = {
         exclude: /node_modules/,
         loaders: [
           'babel'
-        ]
-      }
-    ]
+        ],
+      },
+    ],
   },
+  
+  plugins: [
+    ...!isDev ? [
+      new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: JSON.stringify('production')
+        }
+      }),
+      new webpack.optimize.UglifyJsPlugin()
+    ] : [],
+  ],
 
   devServer: {
     contentBase: 'docs/'
-  }
+  },
 }
