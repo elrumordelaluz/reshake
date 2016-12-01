@@ -1,6 +1,5 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import classNames from 'classnames';
 
 const Shake = ({
 	h = 5,
