@@ -285,7 +285,7 @@ class Customizer extends Component {
         <Code>
           <code>
 {`import React, { Component } from 'react'
-import Shake from 'reshake'
+import { Shake } from 'reshake'
 
 class App extends Component {
   render () {
