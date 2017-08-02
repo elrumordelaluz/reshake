@@ -16,7 +16,7 @@ const Shake = ({
 	active = true,
 	trigger = ':hover',
 	fixedStop = false,
-  elem = 'div',
+	elem = 'div',
 	...props,
 }) => {
 	const random = (max, min = 0) => {
@@ -41,15 +41,8 @@ const Shake = ({
 		}
 		
 		// Init de las transformaciones en 0% y 100%
-		kf[`0%`] = kf[`100%`] =  {
+		kf[`0%`] = kf[`${Math.min(max, 100)}%`] =  {
 			transform: init,
-		}
-		
-		// Init también en caso el `max` < 100
-		if (max < 100) {
-			kf[`${max}%`] = {
-				transform: init,
-			}
 		}
 		
 		return kf;
@@ -67,15 +60,14 @@ const Shake = ({
 		}, '')
 	};
 	
-	const shakeKeyframes = keyframes`${toString(doKeyframes())}`;
-  
-  const shouldShakeDefault = fixed || (!fixed && freez);
-  const shouldShakeWhenTriggered = !fixed && !freez;
+	const shakeKeyframes = keyframes`${toString(kf)}`;
+	const shouldShakeDefault = fixed || (!fixed && freez);
+	const shouldShakeWhenTriggered = !fixed && !freez;
 	
 	const ShakeComp = styled[elem]`
 		animationName: ${shouldShakeDefault && shakeKeyframes};
 		animationDuration: ${dur}ms;
-  	animationIterationCount: ${q};
+		animationIterationCount: ${q};
 		display: 'inline-block';
 		transformOrigin: ${orig};
 		
@@ -90,8 +82,8 @@ const Shake = ({
 		
 	return (
 		<ShakeComp { ...props }>
-  		{ props.children }
-  	</ShakeComp>
+			{ props.children }
+		</ShakeComp>
 	);
 };
 
