@@ -4,7 +4,7 @@
   "description": "CSShake in React",
   "main": "dist/index.js",
   "scripts": {
-    "prepublish": "mkdir -p dist && babel src --out-dir dist",
+    "prepare": "mkdir -p dist && babel src --out-dir dist",
     "build": "NODE_ENV=production webpack -p",
     "start": "webpack-dev-server"
   },
