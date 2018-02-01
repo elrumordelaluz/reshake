@@ -54,8 +54,8 @@ const Wrapper = styled.div`
 `
 
 const Title = styled.h1`
-  fontFamily: Dancing Script, 'cursive';
-  fontSize: 4em;
+  font-family: Dancing Script, 'cursive';
+  font-size: 4em;
   margin-bottom: 0;
   margin-top: 0;
 `
@@ -123,7 +123,7 @@ const Slider = styled.input`
   background-color: rgba(0, 0, 0, 0.121569);
   background-clip: content-box;
   height: 6px;
-  borderRadius: 999px;
+  border-radius: 999px;
   appearance: none;
 `
 

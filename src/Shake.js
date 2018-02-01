@@ -65,19 +65,19 @@ const Shake = ({
 	const shouldShakeWhenTriggered = !fixed && !freez;
 	
 	const ShakeComp = styled[elem]`
-		animationName: ${shouldShakeDefault && shakeKeyframes};
-		animationDuration: ${dur}ms;
-		animationIterationCount: ${q};
+		animation-name: ${shouldShakeDefault && shakeKeyframes};
+		animation-duration: ${dur}ms;
+		animation-iteration-count: ${q};
 		display: 'inline-block';
-		transformOrigin: ${orig};
+		transform-origin: ${orig};
 		
 		&${trigger} {
-			animationName: ${shouldShakeWhenTriggered && shakeKeyframes};
-			animationPlayState: ${freez && (!fixed ? 'running' : 'paused')};
+			animation-name: ${shouldShakeWhenTriggered && shakeKeyframes};
+			animation-play-state: ${freez && (!fixed ? 'running' : 'paused')};
 			animation: ${fixed && fixedStop && 'initial'};
 		}
 		
-		animationPlayState: ${freez && (!fixed ? 'paused' : 'running')};
+		animation-play-state: ${freez && (!fixed ? 'paused' : 'running')};
 	`;
 		
 	return (
