@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 
@@ -165,7 +165,7 @@ const Check = ({ checked = false, label, onChange }) => {
   )
 }
 
-class Customizer extends Component {
+class Customizer extends PureComponent {
   constructor (props) {
     super(props)
     
@@ -313,13 +313,13 @@ class App extends Component {
 }
 
 
-class App extends Component {
+class App extends PureComponent {
   render() {
     return (
       <Wrapper>
         
         <Title>&lt;Reshake/&gt;</Title>
-        <p>
+        <p style={{ color: '#7ddcd3' }}>
           <Shake elem='span'>
             <Link 
               href="http://elrumordelaluz.github.io/csshake/">CSShake</Link>
