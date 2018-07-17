@@ -1,6 +1,6 @@
 {
   "name": "reshake",
-  "version": "1.0.8",
+  "version": "1.1.0",
   "description": "CSShake in React",
   "main": "dist/index.js",
   "scripts": {
@@ -8,7 +8,12 @@
     "build": "NODE_ENV=production webpack --mode production",
     "start": "webpack-dev-server --mode development --open"
   },
-  "keywords": ["react", "css", "csshake", "react-component"],
+  "keywords": [
+    "react",
+    "css",
+    "csshake",
+    "react-component"
+  ],
   "author": "elrumordelaluz",
   "license": "MIT",
   "devDependencies": {
