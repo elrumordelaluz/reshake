@@ -33,15 +33,7 @@ const names = [
   'ShakeCrazy',
 ]
 
-const emojee = [
-  '😬',
-  '👽',
-  '😎',
-  '🚙',
-  '👆',
-  '🔔',
-  '😹',
-]
+const emojee = ['😬', '👽', '😎', '🚙', '👆', '🔔', '😹']
 
 const Wrapper = styled.div`
   padding: 2em;
@@ -74,8 +66,8 @@ const Code = styled.pre`
   color: #333;
   word-break: break-all;
   word-wrap: break-word;
-  background-color: rgba(240,240,240,.25);
-  border: 1px solid rgba(240,240,240,.25);
+  background-color: rgba(240, 240, 240, 0.25);
+  border: 1px solid rgba(240, 240, 240, 0.25);
   border-radius: 4px;
   overflow: auto;
 `
@@ -130,23 +122,22 @@ const Slider = styled.input`
 const Footer = styled.footer`
   width: 100%;
   text-align: center;
-  font-size: .85em;
+  font-size: 0.85em;
   margin-top: 3em;
 `
 
-const Range = ({ value, label, onChange, min = 0, max = 100, step = 1}) => {
+const Range = ({ value, label, onChange, min = 0, max = 100, step = 1 }) => {
   return (
     <div style={{ marginBottom: '1em' }}>
-      <label style={{ fontSize: '.85em' }}>
-        { label }
-      </label>
+      <label style={{ fontSize: '.85em' }}>{label}</label>
       <Slider
         type="range"
         value={value}
         onChange={onChange}
-        min={min} 
-        max={max} 
-        step={step} />
+        min={min}
+        max={max}
+        step={step}
+      />
     </div>
   )
 }
@@ -155,20 +146,22 @@ const Check = ({ checked = false, label, onChange }) => {
   return (
     <div style={{ marginBottom: '1em' }}>
       <label style={{ fontSize: '.85em' }}>
-        <input style={{ fontSize: '3em' }}
+        <input
+          style={{ fontSize: '3em' }}
           type="checkbox"
           onChange={onChange}
-          checked={checked} />
-        { label }
+          checked={checked}
+        />
+        {label}
       </label>
     </div>
   )
 }
 
 class Customizer extends PureComponent {
-  constructor (props) {
+  constructor(props) {
     super(props)
-    
+
     this.state = {
       h: 5,
       v: 5,
@@ -179,28 +172,40 @@ class Customizer extends PureComponent {
       fixed: true,
       fixedStop: false,
       freez: false,
+      active: true,
     }
-    
+
     this.handleChangeRange = this.handleChangeRange.bind(this)
     this.handleChangeCheckbox = this.handleChangeCheckbox.bind(this)
   }
-  
-  handleChangeRange (e, attr) {
+
+  handleChangeRange(e, attr) {
     const { value } = e.target
     this.setState({
-      [attr]: Number(value)
+      [attr]: Number(value),
     })
   }
-  
-  handleChangeCheckbox (e, attr) {
+
+  handleChangeCheckbox(e, attr) {
     const { checked } = e.target
     this.setState({
-      [attr]: checked ? true : false
+      [attr]: checked ? true : false,
     })
   }
-  
-  render () {
-    const { h, v, r, dur, int, max, fixed, fixedStop, freez } = this.state
+
+  render() {
+    const {
+      h,
+      v,
+      r,
+      dur,
+      int,
+      max,
+      fixed,
+      fixedStop,
+      freez,
+      active,
+    } = this.state
     const changeH = e => this.handleChangeRange(e, 'h')
     const changeV = e => this.handleChangeRange(e, 'v')
     const changeR = e => this.handleChangeRange(e, 'r')
@@ -210,19 +215,20 @@ class Customizer extends PureComponent {
       this.handleChangeRange(e, 'max')
       if (int > max) {
         this.setState({
-          int: max
+          int: max,
         })
       }
     }
     const toggleFixed = e => this.handleChangeCheckbox(e, 'fixed')
     const toggleFixedStop = e => this.handleChangeCheckbox(e, 'fixedStop')
     const toggleFreez = e => this.handleChangeCheckbox(e, 'freez')
-    
+    const toggleActive = e => this.handleChangeCheckbox(e, 'active')
+
     return (
       <section>
         <Section>
           <Main>
-            <Shake 
+            <Shake
               fixed={fixed}
               fixedStop={fixedStop}
               freez={freez}
@@ -231,60 +237,64 @@ class Customizer extends PureComponent {
               r={r}
               dur={dur}
               int={int}
-              max={max}>
+              max={max}
+              active={active}
+            >
               <Title>&lt;Shake /&gt;</Title>
             </Shake>
           </Main>
-          
+
           <Side>
-            <Range label={`Horizontal ${h}`} value={h} onChange={changeH} />
-            <Range label={`Vertical ${v}`} value={v} onChange={changeV} />
-            <Range 
-              label={`Rotate ${r}`} 
-              max={360}
-              value={r} 
-              onChange={changeR} />  
-            <Range 
-              label={`Duration ${dur}`} 
-              value={dur} 
-              min={10}
-              max={1000}
-              step={10}
-              onChange={changeDur} />
-            <Range 
-              label={`Interval ${int}`} 
-              value={int} 
-              min={0.5}
-              max={max}
-              step={0.1}
-              onChange={changeInt} />
-            <Range 
-              label={`Max ${max}`} 
-              value={max} 
-              min={1}
-              max={100}
-              step={1}
-              onChange={changeMax} />
-            <Check 
-              label="freez" 
-              onChange={toggleFreez}
-              checked={freez} />
-            <Check 
-              label="fixed" 
-              onChange={toggleFixed}
-              checked={fixed} />
-            { fixed && (
-              <Check 
-                label="fixedStop" 
-                onChange={toggleFixedStop}
-                checked={fixedStop} />
-            )}
+            <Check label="active" onChange={toggleActive} checked={active} />
+
+            <div style={{ opacity: active ? 1 : 0.3 }}>
+              <Range label={`Horizontal ${h}`} value={h} onChange={changeH} />
+              <Range label={`Vertical ${v}`} value={v} onChange={changeV} />
+              <Range
+                label={`Rotate ${r}`}
+                max={360}
+                value={r}
+                onChange={changeR}
+              />
+              <Range
+                label={`Duration ${dur}`}
+                value={dur}
+                min={10}
+                max={1000}
+                step={10}
+                onChange={changeDur}
+              />
+              <Range
+                label={`Interval ${int}`}
+                value={int}
+                min={0.5}
+                max={max}
+                step={0.1}
+                onChange={changeInt}
+              />
+              <Range
+                label={`Max ${max}`}
+                value={max}
+                min={1}
+                max={100}
+                step={1}
+                onChange={changeMax}
+              />
+              <Check label="freez" onChange={toggleFreez} checked={freez} />
+              <Check label="fixed" onChange={toggleFixed} checked={fixed} />
+              {fixed && (
+                <Check
+                  label="fixedStop"
+                  onChange={toggleFixedStop}
+                  checked={fixedStop}
+                />
+              )}
+            </div>
           </Side>
-          
         </Section>
         <Code>
           <code>
-{`import React, { Component } from 'react'
+            {`import React, { Component } from 'react'
 import { Shake } from 'reshake'
 
 class App extends Component {
@@ -299,7 +309,12 @@ class App extends Component {
         max={${max}}
         fixed={${fixed}}
         fixedStop={${fixedStop}}
-        freez={${freez}}>
+        freez={${freez}}${
+              !active
+                ? `
+        active={false}`
+                : ''
+            }>
         <h1>&lt;Shake /&gt;</h1>
       </Shake>
     )
@@ -312,57 +327,56 @@ class App extends Component {
   }
 }
 
-
 class App extends PureComponent {
   render() {
     return (
       <Wrapper>
-        
         <Title>&lt;Reshake/&gt;</Title>
         <p style={{ color: '#7ddcd3' }}>
-          <Shake elem='span'>
-            <Link 
-              href="http://elrumordelaluz.github.io/csshake/">CSShake</Link>
-          </Shake> as a React functional Component <Link href="https://github.com/elrumordelaluz/reshake">[GitHub]</Link>
+          <Shake elem="span">
+            <Link href="http://elrumordelaluz.github.io/csshake/">CSShake</Link>
+          </Shake>{' '}
+          as a React functional Component{' '}
+          <Link href="https://github.com/elrumordelaluz/reshake">[GitHub]</Link>
         </p>
-        
+
         <Code>
-          <code>
-            npm i --save reshake
-          </code>
+          <code>npm i --save reshake</code>
         </Code>
-        
+
         <Customizer />
-        
+
         <Title>More...</Title>
         <p>Separated Components for each animation type</p>
-        <ul style={{ margin: 0, padding: 0, }}>
-          { shakes.map((s,i) => {
+        <ul style={{ margin: 0, padding: 0 }}>
+          {shakes.map((s, i) => {
             const name = names[i]
             const Elem = s
             return (
               <ListItem key={i}>
                 <Side>
                   <Code>
-                    <code>
-                      {`<${name} />`}
-                    </code>
+                    <code>{`<${name} />`}</code>
                   </Code>
                 </Side>
                 <Main>
-                  <Elem 
-                    orig={name === 'ShakeRotate' ? 'top center' : 'center center'}
-                    style={{ fontSize: '3em' }}>
-                    { emojee[i] }
+                  <Elem
+                    orig={
+                      name === 'ShakeRotate' ? 'top center' : 'center center'
+                    }
+                    style={{ fontSize: '3em' }}
+                  >
+                    {emojee[i]}
                   </Elem>
                 </Main>
               </ListItem>
-            )})
-          }
+            )
+          })}
         </ul>
-        <Footer >
-          Made with <ShakeSlow fixed>♡</ShakeSlow> by <Link 
-            href="https://twitter.com/elrumordelaluz">@elrumordelaluz</Link> using React.
+        <Footer>
+          Made with <ShakeSlow fixed>♡</ShakeSlow> by{' '}
+          <Link href="https://twitter.com/elrumordelaluz">@elrumordelaluz</Link>{' '}
+          using React.
         </Footer>
       </Wrapper>
     )
