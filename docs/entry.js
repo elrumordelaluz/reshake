@@ -193,6 +193,12 @@ class Customizer extends PureComponent {
     })
   }
 
+  toggleActive = () => {
+    this.setState(prevState => ({
+      active: !prevState.active,
+    }))
+  }
+
   render() {
     const {
       h,
@@ -239,6 +245,7 @@ class Customizer extends PureComponent {
               int={int}
               max={max}
               active={active}
+              onClick={this.toggleActive}
             >
               <Title>&lt;Shake /&gt;</Title>
             </Shake>

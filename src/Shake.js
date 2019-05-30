@@ -77,14 +77,14 @@ const Shake = ({
       animation: ${fixed && fixedStop && 'initial'};
     }
 
-    animation-play-state: ${freez && !fixed ? 'paused' : 'running'};
+    animation-play-state: ${active
+      ? freez && !fixed
+        ? 'paused'
+        : 'running'
+      : 'paused'};
   `
 
-  return active ? (
-    <ShakeComp {...props}>{props.children}</ShakeComp>
-  ) : (
-    props.children
-  )
+  return <ShakeComp {...props}>{props.children}</ShakeComp>
 }
 
 export default Shake
