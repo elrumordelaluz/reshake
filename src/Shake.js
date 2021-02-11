@@ -51,7 +51,7 @@ const Shake = ({
   // Creamos los `@keyframes`
   const kf = doKeyframes()
 
-  const toString = obj => {
+  const toString = (obj) => {
     return Object.keys(obj).reduce((acc, next) => {
       return `${acc}
 			${next} {
