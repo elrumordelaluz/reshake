@@ -1,6 +1,6 @@
 {
   "name": "reshake",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "CSShake in React",
   "main": "dist/index.js",
   "scripts": {
