@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import styled, { keyframes } from 'styled-components'
 
 const toString = (obj) => {
@@ -80,7 +80,7 @@ const Shake = ({
   ...props
 }) => {
   // Creamos los `@keyframes`
-  const shakeKeyframes = keyframes`${doKeyframes(int, max, h, v, r)}`
+  const shakeKeyframes = useMemo(() => keyframes`${doKeyframes(int, max, h, v, r)}`, [int, max, h, v, r])
   const shouldShakeDefault = fixed || (!fixed && freez)
   const shouldShakeWhenTriggered = !fixed && !freez
 
