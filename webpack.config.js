@@ -24,6 +24,8 @@ module.exports = {
   },
 
   devServer: {
-    contentBase: 'docs/',
+    static: {
+      directory: 'docs/',
+    },
   },
 }

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import { createRoot } from 'react-dom/client'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 
@@ -194,30 +195,20 @@ class Customizer extends PureComponent {
   }
 
   toggleActive = () => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       active: !prevState.active,
     }))
   }
 
   render() {
-    const {
-      h,
-      v,
-      r,
-      dur,
-      int,
-      max,
-      fixed,
-      fixedStop,
-      freez,
-      active,
-    } = this.state
-    const changeH = e => this.handleChangeRange(e, 'h')
-    const changeV = e => this.handleChangeRange(e, 'v')
-    const changeR = e => this.handleChangeRange(e, 'r')
-    const changeDur = e => this.handleChangeRange(e, 'dur')
-    const changeInt = e => this.handleChangeRange(e, 'int')
-    const changeMax = e => {
+    const { h, v, r, dur, int, max, fixed, fixedStop, freez, active } =
+      this.state
+    const changeH = (e) => this.handleChangeRange(e, 'h')
+    const changeV = (e) => this.handleChangeRange(e, 'v')
+    const changeR = (e) => this.handleChangeRange(e, 'r')
+    const changeDur = (e) => this.handleChangeRange(e, 'dur')
+    const changeInt = (e) => this.handleChangeRange(e, 'int')
+    const changeMax = (e) => {
       this.handleChangeRange(e, 'max')
       if (int > max) {
         this.setState({
@@ -225,10 +216,10 @@ class Customizer extends PureComponent {
         })
       }
     }
-    const toggleFixed = e => this.handleChangeCheckbox(e, 'fixed')
-    const toggleFixedStop = e => this.handleChangeCheckbox(e, 'fixedStop')
-    const toggleFreez = e => this.handleChangeCheckbox(e, 'freez')
-    const toggleActive = e => this.handleChangeCheckbox(e, 'active')
+    const toggleFixed = (e) => this.handleChangeCheckbox(e, 'fixed')
+    const toggleFixedStop = (e) => this.handleChangeCheckbox(e, 'fixedStop')
+    const toggleFreez = (e) => this.handleChangeCheckbox(e, 'freez')
+    const toggleActive = (e) => this.handleChangeCheckbox(e, 'active')
 
     return (
       <section>
@@ -390,4 +381,6 @@ class App extends PureComponent {
   }
 }
 
-ReactDOM.render(<App />, root)
+const container = document.getElementById('root')
+const root = createRoot(container)
+root.render(<App />)
