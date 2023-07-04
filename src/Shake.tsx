@@ -1,7 +1,8 @@
-import React, { useMemo } from 'react'
-import styled, { keyframes } from 'styled-components'
+import { useMemo } from 'react'
+import styled, { Keyframes, keyframes } from 'styled-components'
 
-const toString = (obj) => {
+type TransformObjectType = { [key: string]: { transform: any } }
+const toString = (obj: TransformObjectType) => {
   return Object.keys(obj).reduce((acc, next) => {
     return `${acc}
 			${next} {
@@ -10,7 +11,30 @@ const toString = (obj) => {
   }, '')
 }
 
-const ShakeComp = styled.div`
+export type CommonShakePropType = {
+  h: number
+  v: number
+  r: number
+  dur: number
+  q: number | string
+  tf: string
+  int: number
+  max: number
+  orig: string
+  fixed: boolean
+  freez: boolean
+  active: boolean
+  trigger: string
+  fixedStop: string | false
+}
+
+const ShakeComp = styled.div<
+  {
+    shouldShakeDefault: boolean
+    shakeKeyframes: Keyframes
+    shouldShakeWhenTriggered: boolean
+  } & CommonShakePropType
+>`
   animation-name: ${(p) => p.shouldShakeDefault && p.shakeKeyframes};
   animation-duration: ${(p) => p.dur}ms;
   animation-iteration-count: ${(p) => p.q};
@@ -28,14 +52,20 @@ const ShakeComp = styled.div`
     p.active ? (p.freez && !p.fixed ? 'paused' : 'running') : 'paused'};
 `
 
-const random = (max, min = 0) => {
+const random = (max: number, min: number = 0) => {
   return Math.random() * (max - min) - max / 2
 }
 
-const doKeyframes = (int, max, h, v, r) => {
+const doKeyframes = (
+  int: number,
+  max: number,
+  h: number,
+  v: number,
+  r: number
+) => {
   const init = 'translate(0,0) rotate(0)'
   // el objecto que iremos llenando
-  const kf = {
+  const kf: TransformObjectType = {
     '0%': {
       transform: init,
     },
@@ -61,6 +91,15 @@ const doKeyframes = (int, max, h, v, r) => {
   return toString(kf)
 }
 
+export type ShakePropType = Partial<CommonShakePropType> &
+  Omit<
+    React.DetailedHTMLProps<
+      React.HTMLAttributes<HTMLDivElement>,
+      HTMLDivElement
+    >,
+    'as'
+  > & { elem?: any }
+
 const Shake = ({
   h = 5,
   v = 5,
@@ -78,9 +117,12 @@ const Shake = ({
   fixedStop = false,
   elem = 'div',
   ...props
-}) => {
-  // Creamos los `@keyframes`
-  const shakeKeyframes = useMemo(() => keyframes`${doKeyframes(int, max, h, v, r)}`, [int, max, h, v, r])
+}: ShakePropType) => {
+  // Creamos los @keyframes
+  const shakeKeyframes = useMemo(
+    () => keyframes`${doKeyframes(int, max, h, v, r)}`,
+    [int, max, h, v, r]
+  )
   const shouldShakeDefault = fixed || (!fixed && freez)
   const shouldShakeWhenTriggered = !fixed && !freez
 

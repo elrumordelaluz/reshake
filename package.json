@@ -3,8 +3,9 @@
   "version": "1.2.4",
   "description": "CSShake in React",
   "main": "dist/index.js",
+  "types": "dist/types/index.d.ts",
   "scripts": {
-    "prepare": "mkdir -p dist && babel src --out-dir dist",
+    "prepare": "mkdir -p dist && babel src --out-dir dist --extensions .ts,.js,.tsx,.jsx && tsc",
     "build": "NODE_ENV=production webpack --mode production",
     "start": "webpack serve --mode development --open"
   },
@@ -37,10 +38,15 @@
     "@babel/plugin-syntax-import-meta": "^7.10.4",
     "@babel/preset-env": "7.17.10",
     "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "7.22.5",
+    "@types/react": "18.2.14",
+    "@types/styled-components": "5.1.26",
     "babel-loader": "8.2.5",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "styled-components": "5.3.5",
+    "tsc": "2.0.4",
+    "typescript": "5.1.6",
     "webpack": "5.72.1",
     "webpack-cli": "4.9.2",
     "webpack-dev-server": "4.9.0"
