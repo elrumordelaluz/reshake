@@ -35,8 +35,9 @@ const shakes = {
     v: 40,
     r: 20,
     dur: 100,
-    int: .1,
+    int: 0.1,
   },
-};
+} as const
+export type ShakeTypes = keyof typeof shakes
 
-export default shakes;
+export default shakes
